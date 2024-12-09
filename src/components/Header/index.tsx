@@ -2,6 +2,8 @@
 
 import React from "react";
 import { useUser } from "@/api/rest/users/me/hook";
+import { AvatarIcon } from "@nextui-org/shared-icons";
+import Link from "next/link";
 
 const Header = () => {
   const { data: user } = useUser();
@@ -9,10 +11,14 @@ const Header = () => {
   return (
     <div
       className={
-        "w-full h-14 bg-primary flex items-center justify-end px-4 text-black-0 text-small"
+        "w-full h-14 bg-primary flex items-center justify-between px-4 text-black-0 text-small"
       }
     >
-      {user?.email || "Login"}
+      <Link href={"/"}>CRYPTO CHARGE</Link>
+      <div className={"flex  gap-2 items-center"}>
+        {user?.email || <Link href={"/login"}>Login</Link>}
+        <AvatarIcon />
+      </div>
     </div>
   );
 };

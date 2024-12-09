@@ -45,6 +45,7 @@ const AuthForm = () => {
         <Input
           placeholder={"Password"}
           {...register("password")}
+          type={"password"}
           errorMessage={errors.password?.message}
           isInvalid={!!errors.password}
         />

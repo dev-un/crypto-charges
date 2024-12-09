@@ -22,13 +22,7 @@ export const useUser = ({
   });
 
   useEffect(() => {
-    if (
-      hook.isLoading ||
-      hook.data ||
-      !router ||
-      // router.pathname === "/login" ||
-      !onErrorRedirectTo
-    ) {
+    if (hook.isLoading || hook.data || !router || !onErrorRedirectTo) {
       return;
     }
 
