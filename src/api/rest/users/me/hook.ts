@@ -4,21 +4,19 @@ import { useRouter } from "next/navigation";
 import { USER_QUERY_KEY } from "./constants";
 import { getMe } from "./handler";
 import { User } from "./types";
-import { TOKEN_KEY } from "@/constants/localStorage";
 
 export const useUser = ({
-  enabled = true,
   onErrorRedirectTo,
-}: { enabled?: boolean; onErrorRedirectTo?: string } = {}) => {
+}: { onErrorRedirectTo?: string } = {}) => {
   const router = useRouter();
 
-  const hook = useQuery<User>({
+  const hook = useQuery<User | null>({
     queryKey: [USER_QUERY_KEY],
     queryFn: getMe,
-    enabled:
-      typeof window !== "undefined" &&
-      !!localStorage.getItem(TOKEN_KEY) &&
-      enabled,
+    retry: (failureCount, error) => {
+      if (error.message === "No token") return false; // disable repeats
+      return failureCount < 3;
+    },
   });
 
   useEffect(() => {

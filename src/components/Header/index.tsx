@@ -4,9 +4,13 @@ import React from "react";
 import { useUser } from "@/api/rest/users/me/hook";
 import { AvatarIcon } from "@nextui-org/shared-icons";
 import Link from "next/link";
+import { useLogout } from "@/api/rest/auth/logout/hook";
+import { Spinner } from "@nextui-org/spinner";
+import { Button } from "@nextui-org/button";
 
 const Header = () => {
-  const { data: user } = useUser();
+  const { data: user, isLoading } = useUser();
+  const { mutate: logout } = useLogout();
 
   return (
     <header
@@ -15,9 +19,21 @@ const Header = () => {
       }
     >
       <Link href={"/"}>CRYPTO CHARGE</Link>
-      <div className={"flex  gap-2 items-center"}>
-        {user?.email || <Link href={"/login"}>Login</Link>}
-        <AvatarIcon />
+      <div className={"flex gap-2 items-center"}>
+        {isLoading && !user ? (
+          <Spinner size="sm" />
+        ) : (
+          <>
+            {user ? (
+              <Button size={"sm"} onClick={() => logout()}>
+                {user.email}
+                <AvatarIcon />
+              </Button>
+            ) : (
+              <Link href={"/login"}>Login</Link>
+            )}
+          </>
+        )}
       </div>
     </header>
   );
