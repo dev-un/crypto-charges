@@ -1,4 +1,4 @@
-import { RegisterDto } from "./dto";
+import { RegisterDto } from "./types";
 import { baseApiClient } from "@/api/instances/base";
 import { REGISTER_PATH } from "./constants";
 

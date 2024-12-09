@@ -9,9 +9,10 @@ import { AuthInputs } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./validation";
 import { useLogin } from "@/api/rest/auth/login/hook";
+import { generateError } from "@/api/utils";
 
 const AuthForm = () => {
-  const { mutate: login } = useLogin();
+  const { mutate: login, error } = useLogin();
 
   const {
     register,
@@ -23,7 +24,6 @@ const AuthForm = () => {
 
   const onSubmit: SubmitHandler<AuthInputs> = async (values) => {
     login(values);
-    // TODO: errors and success handlers
   };
 
   return (
@@ -51,6 +51,12 @@ const AuthForm = () => {
         <Button color={"primary"} type={"submit"}>
           Login
         </Button>
+
+        {error && (
+          <span className={"text-danger text-center text-sm"}>
+            {generateError(error)?.message}
+          </span>
+        )}
       </form>
     </Card>
   );
