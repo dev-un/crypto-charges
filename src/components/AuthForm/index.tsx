@@ -11,6 +11,7 @@ import { loginSchema } from "./validation";
 import { useLogin } from "@/api/rest/auth/login/hook";
 import { generateError } from "@/api/utils";
 import clsx from "clsx";
+import Link from "next/link";
 
 const AuthForm = ({ isLoading }: AuthFormProps) => {
   const { mutate: login, error } = useLogin();
@@ -28,12 +29,7 @@ const AuthForm = ({ isLoading }: AuthFormProps) => {
   };
 
   return (
-    <Card
-      className={clsx(
-        "min-w-64 animate-appearance-in",
-        isLoading && "animate-pulse",
-      )}
-    >
+    <Card className={clsx("min-w-64", isLoading && "animate-pulse")}>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={"flex flex-col gap-3 p-6"}
@@ -53,6 +49,9 @@ const AuthForm = ({ isLoading }: AuthFormProps) => {
           isInvalid={!!errors.password}
           isDisabled={isLoading}
         />
+        <Link href={"/register"} className={"underline text-xs text-center"}>
+          Don't have an account?
+        </Link>
         <Button color={"primary"} type={"submit"} isDisabled={isLoading}>
           Login
         </Button>
