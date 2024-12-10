@@ -1,9 +1,8 @@
 import axios from "axios";
+import { BASE_URL } from "@/api/constants";
 
 const BaseApiClient = () => {
-  return axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
-  });
+  return axios.create({ baseURL: BASE_URL });
 };
 
 export const baseApiClient = BaseApiClient();
