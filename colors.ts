@@ -1,16 +1,16 @@
 import { ThemeColors } from "@nextui-org/theme";
 
 export const COLORS: Partial<ThemeColors> = {
-  foreground: "#b0e0b0",
+  foreground: "#b0bbe0",
   primary: {
-    100: "#a0a04d", // светлый оттенок primary
-    DEFAULT: "#303a30", // основной цвет primary по умолчанию
-    900: "#606000", // темный оттенок primary
-    foreground: "#b0e0b0", // текст
+    100: "#656b95", // светлый оттенок primary
+    DEFAULT: "#3c3b61", // основной цвет primary по умолчанию
+    900: "#001660", // темный оттенок primary
+    foreground: "#b0c1e0", // текст
   },
   secondary: {
     100: "#e6d7c6", // светлый оттенок secondary
-    DEFAULT: "#b0e0b0", // основной цвет secondary по умолчанию
+    DEFAULT: "#b0b8e0", // основной цвет secondary по умолчанию
     900: "#b39a82", // темный оттенок secondary
   },
   success: {

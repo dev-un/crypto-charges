@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header
       className={
-        "w-full h-14 bg-primary flex items-center justify-between px-4 text-black-0 text-small"
+        "w-full h-14 min-h-14 bg-primary flex items-center justify-between px-4 text-black-0 text-small"
       }
     >
       <Link href={"/"}>CRYPTO CHARGE</Link>
