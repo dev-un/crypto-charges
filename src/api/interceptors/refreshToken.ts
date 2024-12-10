@@ -7,18 +7,18 @@ export function refreshTokenInterceptor(instance: AxiosInstance) {
   instance.interceptors.response.use(
     (response) => response,
     async (error) => {
-      const config = error?.config;
+      const originalRequest = error.config;
       const needToRefresh =
         error.response?.status === HttpStatusCode.Unauthorized &&
-        !config?.sent &&
-        !config?.url?.includes(LOGIN_PATH);
+        !originalRequest?.sent &&
+        !originalRequest?.url?.includes(LOGIN_PATH);
 
       if (needToRefresh) {
         try {
-          config.sent = true;
           const data = await refreshTokens();
+          originalRequest.sent = true;
           localStorage.setItem(TOKEN_KEY, data.accessToken);
-          return instance({ ...config, params: { ...error.config.params } });
+          return instance(originalRequest);
         } catch (e) {
           localStorage.removeItem(TOKEN_KEY);
           window.location.href = "/login";

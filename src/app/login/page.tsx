@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import AuthForm from "@/components/AuthForm";
 import { useUser } from "@/api/rest/users/me/hook";
-import { Spinner } from "@nextui-org/spinner";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
@@ -15,20 +14,9 @@ const LoginPage = () => {
     router.replace("/");
   }, [user, isLoading]);
 
-  if (isLoading) {
-    return (
-      <Spinner
-        className={
-          "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        }
-        color={"secondary"}
-      />
-    );
-  }
-
   return (
-    <section>
-      <AuthForm />
+    <section className={"flex items-center justify-center h-full"}>
+      <AuthForm isLoading={isLoading} />
     </section>
   );
 };
