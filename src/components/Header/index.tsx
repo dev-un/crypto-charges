@@ -19,16 +19,19 @@ const Header = () => {
       }
     >
       <Link href={"/"}>CRYPTO CHARGE</Link>
-      <div className={"flex gap-2 items-center"}>
+      <div className={"flex gap-4 items-center"}>
         {isLoading && !user ? (
           <Spinner size="sm" />
         ) : (
           <>
             {user ? (
-              <Button size={"sm"} onClick={() => logout()}>
+              <>
                 {user.email}
-                <AvatarIcon />
-              </Button>
+                <Button size={"sm"} onClick={() => logout()}>
+                  Logout
+                  <AvatarIcon />
+                </Button>
+              </>
             ) : (
               <Link href={"/login"}>Login</Link>
             )}
