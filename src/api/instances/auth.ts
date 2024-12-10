@@ -4,7 +4,7 @@ import { BASE_URL } from "@/api/constants";
 import { LOGIN_PATH } from "@/api/rest/auth/login/constants";
 import { refresh } from "@/api/rest/auth/refresh/handler";
 
-const AuthApiClient = () => {
+const createAuthApiClient = () => {
   const instance = axios.create({ baseURL: BASE_URL });
 
   // Interceptor for attaching Authorization header
@@ -20,15 +20,14 @@ const AuthApiClient = () => {
     (response) => response,
     async (error) => {
       const config = error?.config;
-
-      if (
+      const needToRefresh =
         error.response?.status === 401 &&
         !config?.sent &&
-        !config?.url?.includes(LOGIN_PATH)
-      ) {
-        config.sent = true;
+        !config?.url?.includes(LOGIN_PATH);
 
+      if (needToRefresh) {
         try {
+          config.sent = true;
           const data = await refresh();
           localStorage.setItem(TOKEN_KEY, data.accessToken);
           return instance({ ...config, params: { ...error.config.params } });
@@ -45,4 +44,4 @@ const AuthApiClient = () => {
   return instance;
 };
 
-export const authApiClient = AuthApiClient();
+export const authApiClient = createAuthApiClient();
