@@ -7,9 +7,5 @@ export const useUser = () => {
   return useQuery<User>({
     queryKey: [USER_QUERY_KEY],
     queryFn: getMe,
-    retry: (failureCount, error) => {
-      if (error.message === "No token") return false; // disable repeats
-      return failureCount < 3;
-    },
   });
 };

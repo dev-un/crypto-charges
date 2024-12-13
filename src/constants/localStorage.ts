@@ -1,2 +1,2 @@
-const PREFIX = 'crypto-charges'
-export const TOKEN_KEY = `${PREFIX}:token`
+const PREFIX = "crypto-charges";
+export const TOKEN_KEY = `${PREFIX}:token`;
