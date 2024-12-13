@@ -9,7 +9,6 @@ import { AuthFormProps, AuthInputs } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./validation";
 import { useLogin } from "@/api/rest/auth/login/hook";
-import { generateError } from "@/api/utils";
 import clsx from "clsx";
 import Link from "next/link";
 
@@ -58,7 +57,7 @@ const AuthForm = ({ isLoading }: AuthFormProps) => {
 
         {error && (
           <span className={"text-danger text-center text-sm"}>
-            {generateError(error)?.message}
+            {error.details}
           </span>
         )}
       </form>

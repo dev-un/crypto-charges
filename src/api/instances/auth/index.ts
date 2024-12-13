@@ -1,6 +1,7 @@
 import axios from "axios";
-import { addTokenToHeadersInterceptor } from "./interceptors/request/tokenToHeaders";
-import { refreshTokenInterceptor } from "./interceptors/response/refreshToken";
+import { addTokenToHeadersInterceptor } from "@/api/interceptors/request/tokenToHeaders";
+import { refreshTokenInterceptor } from "@/api/interceptors/response/refreshToken";
+import { errorInterceptor } from "@/api/interceptors/response/errorInterceptor";
 
 const createAuthApiClient = () => {
   const instance = axios.create({
@@ -10,6 +11,7 @@ const createAuthApiClient = () => {
   // interceptors
   addTokenToHeadersInterceptor(instance);
   refreshTokenInterceptor(instance);
+  errorInterceptor(instance);
 
   return instance;
 };

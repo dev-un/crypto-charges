@@ -9,7 +9,6 @@ import { RegisterFormInputs } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./validation";
 import { useRegister } from "@/api/rest/auth/register/hook";
-import { generateError } from "@/api/utils";
 import clsx from "clsx";
 import Link from "next/link";
 
@@ -57,7 +56,7 @@ const RegisterForm = () => {
 
           {error && (
             <span className={"text-danger text-center text-sm"}>
-              {generateError(error)?.message}
+              {error.details}
             </span>
           )}
         </form>
