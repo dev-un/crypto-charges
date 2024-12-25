@@ -13,12 +13,12 @@ import clsx from "clsx";
 import Link from "next/link";
 
 const RegisterForm = () => {
-  const { mutate: registerUser, error, isSuccess } = useRegister();
+  const { mutate: registerUser, error: serverError, isSuccess } = useRegister();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors: formErrors },
   } = useForm<RegisterFormInputs>({
     resolver: yupResolver(registerSchema),
   });
@@ -37,15 +37,15 @@ const RegisterForm = () => {
           <Input
             placeholder={"Email"}
             {...register("email")}
-            errorMessage={errors.email?.message}
-            isInvalid={!!errors.email}
+            errorMessage={formErrors.email?.message}
+            isInvalid={!!formErrors.email}
           />
           <Input
             placeholder={"Password"}
             {...register("password")}
             type={"password"}
-            errorMessage={errors.password?.message}
-            isInvalid={!!errors.password}
+            errorMessage={formErrors.password?.message}
+            isInvalid={!!formErrors.password}
           />
           <Link href={"/login"} className={"underline text-xs text-center"}>
             Already have an account?
@@ -54,9 +54,9 @@ const RegisterForm = () => {
             Register
           </Button>
 
-          {error && (
+          {serverError && (
             <span className={"text-danger text-center text-sm"}>
-              {error.details}
+              {serverError.details}
             </span>
           )}
         </form>

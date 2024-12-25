@@ -13,12 +13,12 @@ import clsx from "clsx";
 import Link from "next/link";
 
 const AuthForm = ({ isLoading }: AuthFormProps) => {
-  const { mutate: login, error } = useLogin();
+  const { mutate: login, error: serverError } = useLogin();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors: formErrors },
   } = useForm<AuthInputs>({
     resolver: yupResolver(loginSchema),
   });
@@ -36,16 +36,16 @@ const AuthForm = ({ isLoading }: AuthFormProps) => {
         <Input
           placeholder={"Email"}
           {...register("email")}
-          errorMessage={errors.email?.message}
-          isInvalid={!!errors.email}
+          errorMessage={formErrors.email?.message}
+          isInvalid={!!formErrors.email}
           isDisabled={isLoading}
         />
         <Input
           placeholder={"Password"}
           {...register("password")}
           type={"password"}
-          errorMessage={errors.password?.message}
-          isInvalid={!!errors.password}
+          errorMessage={formErrors.password?.message}
+          isInvalid={!!formErrors.password}
           isDisabled={isLoading}
         />
         <Link href={"/register"} className={"underline text-xs text-center"}>
@@ -55,9 +55,9 @@ const AuthForm = ({ isLoading }: AuthFormProps) => {
           Login
         </Button>
 
-        {error && (
+        {serverError && (
           <span className={"text-danger text-center text-sm"}>
-            {error.details}
+            {serverError.details}
           </span>
         )}
       </form>
