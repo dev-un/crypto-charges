@@ -1,4 +1,4 @@
-import {nextui} from '@nextui-org/theme';
+import { nextui } from "@nextui-org/theme";
 import { COLORS } from "./colors";
 import type { Config } from "tailwindcss";
 
@@ -7,7 +7,7 @@ export default {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|card|input|ripple|spinner).js"
+    "./node_modules/@nextui-org/theme/dist/components/(button|card|input|table|ripple|spinner|checkbox|form|spacer).js",
   ],
   theme: {
     colors: {
@@ -34,14 +34,16 @@ export default {
       },
     },
   },
-  plugins: [nextui({
-    defaultTheme: "light", // default theme from the themes object
-    defaultExtendTheme: "light", // default theme to extend on custom themes
-    themes: {
-      light: {
-        layout: {}, // light theme layout tokens
-        colors: { ...COLORS, background: "#fafffa" }, // light theme colors
+  plugins: [
+    nextui({
+      defaultTheme: "light", // default theme from the themes object
+      defaultExtendTheme: "light", // default theme to extend on custom themes
+      themes: {
+        light: {
+          layout: {}, // light theme layout tokens
+          colors: { ...COLORS, background: "#fafffa" }, // light theme colors
+        },
       },
-    },
-  })],
+    }),
+  ],
 } satisfies Config;
