@@ -53,6 +53,14 @@ const RegisterForm = () => {
           <Button color={"primary"} type={"submit"}>
             Register
           </Button>
+          <Link
+            className={"bg-secondary text-center rounded-lg p-2"}
+            href={
+              "https://id.vk.ru/authorize?code_challenge=2E-QiQf5YNcnyWjfGL-1VcsrM7vBTp7AlFIOXWI1sQg&code_challenge_method=s256&client_id=54139650&response_type=code&scope=&redirect_uri=https%3A%2F%2Fpablo-cliffy-prognosticatively.ngrok-free.app%2Fregister%2Fvk"
+            }
+          >
+            Register with VK
+          </Link>
 
           {serverError && (
             <span className={"text-danger text-center text-sm"}>

@@ -1,5 +1,5 @@
 import { nextui } from "@nextui-org/theme";
-import { COLORS } from "./colors";
+import { COLORS } from "./src/colors";
 import type { Config } from "tailwindcss";
 
 export default {

@@ -1,0 +1,76 @@
+$day-size: 36px;
+$day-gap: 0px;
+$day-radius: 12px;
+
+.DateRangePicker {
+  width: fit-content;
+
+  &__controls {
+    display: flex;
+    padding: 12px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  &__weekDayNames {
+    display: flex;
+    gap: $day-gap;
+    margin-bottom: 4px;
+    color: #3c3b61;
+
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: $day-size;
+      height: $day-size;
+    }
+  }
+
+  &__month {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    &__week {
+      display: flex;
+      gap: $day-gap;
+
+      &__day {
+        display: flex;
+        width: $day-size;
+        height: $day-size;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          user-select: none;
+          cursor: pointer;
+          border: 1px solid #3c3b61;
+        }
+
+        &--hidden {
+          visibility: hidden;
+        }
+
+        &--selected {
+          background: #3c3b61;
+          color: white;
+        }
+
+        &--left-round {
+          border-bottom-left-radius: $day-radius;
+          border-top-left-radius: $day-radius;
+        }
+
+        &--right-round {
+          border-bottom-right-radius: $day-radius;
+          border-top-right-radius: $day-radius;
+        }
+      }
+    }
+  }
+}
